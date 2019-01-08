@@ -1,0 +1,144 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" *ngIf="teacherListView">
+  <ol class="breadcrumb">
+      <li><a href="#"><span class="glyphicon glyphicon-blackboard"></span> Dashboard</a></li>
+      <li class="active"><span class="glyphicon glyphicon-info-sign"></span>  Teacher</li>
+    </ol>
+
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 pull-right text-right">
+      <button class="btn btn-primary btn-sm"  (click)= "addNewTeacher('Add')">+ Add New Teacher</button>
+    </div>
+  </div>
+  <!-- well for filters-->
+  <div class="well well-sm">
+      <div class="row">
+        <!-- search box-->
+        <div class="col-xs-3 col-sm-3 pull-right text-right">
+            <input type="text" class="form-control" placeholder="Search by Name">
+        </div>
+      </div>
+    </div>
+  <!-- teacher list-->
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Phone</th>
+          <th>email</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor= 'let teacher of (teachers$ | async)'>
+          <td>{{teacher.name}}</td>
+          <td>{{teacher.gender}}</td>
+          <td>{{teacher.phone}}</td>
+          <td>{{teacher.email}}</td>
+          <td>{{teacher.address}}</td>
+          <td>
+            <button type="button" class="btn btn-warning btn-xs" title="edit" (click)="updateTeacher(teacher)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-danger btn-xs" title="delete" (click)= "deleteTeacher(teacher)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- add/edit Teacher section -->
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" *ngIf="addTeacherView">
+  <ol class="breadcrumb">
+      <li><a href="#"><span class="glyphicon glyphicon-blackboard"></span> Dashboard</a></li>
+      <li><a (click)="closeAddNewTeacher()" routerLinkActive="router-link-active" ><span class="glyphicon glyphicon-info-sign"></span> Teacher</a></li>
+      <li class="active"> {{formState}} Teacher</li>
+    </ol>
+
+  <!-- add teacher form-->
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" #form="ngForm" (ngSubmit)="addTeacher()">
+          <!-- name-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="Name">Name</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="Name" placeholder="Name" name="name" [(ngModel)]="teacher.name">
+            </div>
+          </div>
+          <!-- designation -->
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label" for="Designation">Designation</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="Designation" placeholder="Guardian" name="designation" [(ngModel)]="teacher.designation">
+            </div>
+          </div>
+          <!-- Date of birth-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="dateOfBirth">Date of Birth</label>
+            <div class="col-sm-4">
+              <input type="date" class="form-control" placeholder="MM/DD/YYYY" name ="dateOfBirth" [(ngModel)]="teacher.dateOfBirth">
+            </div>
+          </div>
+          <!-- Gender -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="gender">Gender</label>
+            <div class="col-sm-4">
+              <div class="btn-group">
+                <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">{{gender}}
+                   <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a (click)="selectGender('Male')">Male</a></li>
+                  <li><a (click)="selectGender('Female')">Female</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- email -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email</label>
+            <div class="col-sm-4">
+              <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="teacher.email">
+            </div>
+          </div>
+          <!-- phone -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="phone">phone</label>
+            <div class="col-sm-4">
+              <input type="number" maxlength="10" id="phone" class="form-control" placeholder="phone" name="phone" [(ngModel)]="teacher.phone">
+            </div>
+          </div>
+          <!-- address -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="address">Address</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="address" placeholder="Address" name="address" name="address" [(ngModel)]="teacher.address">
+            </div>
+          </div>
+          <!-- Class -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="joiningDate">Joining Date</label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control" id="joiningDate" placeholder="MM/DD/YYYY" name="joiningDate" [(ngModel)]="teacher.joiningDate">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary btn-sm">{{formState}} Teacher</button> &nbsp;
+              <button type="submit" class="btn btn-default btn-sm" (click)="closeAddNewTeacher()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
