@@ -7,12 +7,12 @@ export const environment = {
   // put your firebase code here
   // replace complete firebase object
   firebase : {
-    apiKey: 'AIzaSyA7x0nzAVX2JCrewGGmFpl8Vouhr9Mmr1skW0Q',
-    authDomain: 'cruddemo-41181.firebaseapp.com',
-    databaseURL: 'https://cruddemo-41181.firebaseio.com',
+    apiKey: 'AIzaVyA7x0nzIVX2NCrewAGmSpl8Houhr9Mmr1skW0Q',
+    authDomain: 'cruddemo-9867941.firebaseapp.com',
+    databaseURL: 'https://cruddemo-97941.firebaseio.com',
     projectId: 'cruddemo-41181',
     storageBucket: 'cruddemo-41181.appspot.com',
-    messagingSenderId: '887446025755'
+    messagingSenderId: '123456789098'
   }
 };
 
